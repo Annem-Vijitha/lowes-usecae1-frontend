@@ -18,60 +18,65 @@ export default function AddItemForm() {
     value: category.id
   }));
 
+  
+  const [itemId, setId] = useState(null);
   const [itemName, setName] = useState("");
-  const [itemId, setId] = useState("");
   const [itemStatus, setStatus] = useState("");
   const [category, setCategory] = useState("");
+  const [open, setOpen] = useState(false);
 
 
-  const handleChange1 = (e, { value }) => setName({ value });
-  const handleChange2 = (e, { value }) => setId({ value });
-  const handleChange3 = (e, { value }) => setStatus({ value });
-  const handleChange4 = (e, { value }) => setCategory({ value });
+  const handleChange1 = (e, { value }) => setId(value);
+const handleChange2 = (e, { value }) => setName(value);
+const handleChange3 = (e, { value }) => setStatus(value);
+const handleChange4 = (e, { value }) => setCategory(value);
 
-  const handleSubmit = () => {
- 
-    const item = {
-      name: itemName.value,
-      id: itemId.value,
-      status: itemStatus.value,
-      category_id: parseInt(category.value),
-    };
 
-    addItem(item);
+const handleSubmit = () => {
+  const item = {
+    itemName: itemName,
+    itemID: itemId,
+    itemStatus: itemStatus,
+    category_id: parseInt(category),
   };
-
+  console.log("Submitting category:", item); 
+  const jsonData = JSON.stringify(item);
+  console.log("Submitting category:", jsonData);
+  addItem(jsonData);
+  setOpen(false);
+};
+const handleOpen = () => {
+  setOpen(true);
+};
   return (
     <Modal
-      trigger={
-        <Button primary fluid>
-          Add new Item
-        </Button>
-      }
+    trigger={<Button primary onClick={handleOpen}>Add new Item</Button>}
+    open={open}
+    onClose={() => setOpen(false)}
     >
       <Modal.Header>Add new Item</Modal.Header>
       <Modal.Content>
         <Form onSubmit={handleSubmit}>
-          <Form.Input
-            name="itemName"
-            label="Name"
-            placeholder=" name"
-            onChange={handleChange1}
-            value={itemName.value}
-          />
             <Form.Input
             name="itemId"
             label="Id"
             placeholder=" id"
+            onChange={handleChange1}
+            value={itemId}
+          />
+          <Form.Input
+            name="itemName"
+            label="Name"
+            placeholder=" name"
             onChange={handleChange2}
-            value={itemId.value}
+            value={itemName}
           />
            <Form.Input
             name="itemStatus"
             label="Status"
             placeholder=" status"
             onChange={handleChange3}
-            value={itemId.value}
+            value={itemStatus}
           />
           <Form.Field>
             <Header as="h5">Category</Header>
@@ -82,10 +87,9 @@ export default function AddItemForm() {
               selection
               options={listCategories}
               onChange={handleChange4}
-              value={category.value}
+              value={category}
             />
           </Form.Field>
-
           <Button type="submit">Add</Button>
         </Form>
       </Modal.Content>
