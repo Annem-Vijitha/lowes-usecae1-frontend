@@ -5,6 +5,9 @@ import { Grid, Card, Segment } from "semantic-ui-react";
 import Item from "../components/Item";
 import Pagination from "../components/Pagination";
 import AddItemForm from "../components/AddItemForm";
+import DelItemForm from "../components/DelItemForm";
+import UpdateItemForm from "../components/UpdateItemForm";
+
 
 import Context from "../config/context";
 
@@ -50,16 +53,23 @@ export default function Items() {
     ) : null;
 
   const add =  <AddItemForm /> 
-
+  const del = <DelItemForm />
+  const update = <UpdateItemForm />
   return (
     <div>
       <Segment>
         <Grid>
-          <Grid.Column floated="left" width={5}>
+          <Grid.Column floated="left" width={3}>
             <h1>Recent Items</h1>
           </Grid.Column>
-          <Grid.Column floated="right" width={5}>
+          <Grid.Column floated="right" width={3}>
             {add}
+          </Grid.Column>
+          <Grid.Column floated="right" width={3}>
+            {del}
+          </Grid.Column>
+          <Grid.Column floated="right" width={3}>
+            {update}
           </Grid.Column>
         </Grid>
       </Segment>
