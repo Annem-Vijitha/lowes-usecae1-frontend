@@ -21,6 +21,9 @@ export default function Item(props) {
         Comida
       </Label>
       <Card.Content>
+        <Card.Header>{props.item.itemID}</Card.Header>
+      </Card.Content>
+      <Card.Content>
         <Card.Header>
           <Header floated="left">{props.item.itemName}</Header>
           <Header floated="right" color="teal">
