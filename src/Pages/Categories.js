@@ -5,6 +5,8 @@ import { Grid, Segment, Card } from "semantic-ui-react";
 import Category from "../components/Category";
 import Pagination from "../components/Pagination";
 import AddCategoryForm from "../components/AddCategoryForm";
+import DelCategoryForm from "../components/DelCategoryForm";
+import UpdateCategoryForm from "../components/UpdateCategoryForm";
 
 import Context from "../config/context";
 
@@ -49,16 +51,24 @@ export default function Categories() {
       />
     ) : null;
 
-  const add =  <AddCategoryForm /> 
+  const add =  <AddCategoryForm /> ;
+  const del = <DelCategoryForm />;
+  const update = <UpdateCategoryForm/>;
   return (
     <div>
       <Segment>
         <Grid>
-          <Grid.Column floated="left" width={5}>
+          <Grid.Column floated="left" width={3}>
             <h1>Recent Categories</h1>
           </Grid.Column>
-          <Grid.Column floated="right" width={5}>
+          <Grid.Column floated="right" width={3}>
             {add}
+          </Grid.Column>
+          <Grid.Column floated="right" width={3}>
+            {del}
+          </Grid.Column>
+          <Grid.Column floated="right" width={3}>
+            {update}
           </Grid.Column>
         </Grid>
       </Segment>
